@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="AtOnline-Drive" Language="1033" Version="1.0.0.0" Manufacturer="Test" UpgradeCode="b1644b79-aa91-4df3-bb2e-efc05bf6529e">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"/>
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="Installer" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="ResourceComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="AtOnlineFolder" Name="AtOnline" >
+          <Directory Id="INSTALLFOLDER" Name="Drive">
+            <Directory Id="RESOURCEFOLDER" Name="Resource"></Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Win64="yes" Id="drive.exe" Guid="AFE48F41-2F70-49D5-8B68-1DC9E04D2135">
+        <File Source="$(var.Drive.TargetPath)" />
+      </Component>
+      <Component  Win64="yes" Id="dokan1.dll" Guid="0B115BAE-33C6-4CA6-B668-9BF352EA3377">
+        <File Source="..\Drive\Libs\dokan1.dll" />
+      </Component>
+      <Component  Win64="yes" Id="DokanNet.dll" Guid="4C768D04-8E28-4EC4-85CA-85981EBA852D">
+        <File Source="..\Drive\Libs\DokanNet.dll" />
+      </Component>
+      <Component  Win64="yes" Id="FontAwesome.WPF.dll" Guid="0E3C95D6-D20C-4C08-AA81-B5EF734F7F88">
+        <File Source="..\Drive\Libs\FontAwesome.WPF.dll" />
+      </Component>
+      <Component  Win64="yes" Id="Newtonsoft.Json.dll" Guid="FC1E0137-0B7B-4B8A-8860-0FF57C82077F">
+        <File Source="..\Drive\Libs\Newtonsoft.Json.dll" />
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="ResourceComponents" Directory="RESOURCEFOLDER">
+      <Component  Win64="yes" Id="icon.ico" Guid="D06D234F-A437-4152-B260-2E1A8B4723CD">
+        <File Source="..\Drive\Resource\icon.ico" />
+      </Component>
+      <Component  Win64="yes" Id="logo.png" Guid="2C1AC6FF-1E83-426E-B37D-277553F77E22">
+        <File Source="..\Drive\Resource\logo.png" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
