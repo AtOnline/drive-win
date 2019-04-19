@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Bundle Name="AtOnlineDrive-x64" Version="1.0.0.0" Manufacturer="test" UpgradeCode="7dfd79be-6d30-421b-9247-24afaffc7083">
-		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="AtOnline - Drive" Version="1.0.0.0" Manufacturer="test" UpgradeCode="7dfd79be-6d30-421b-9247-24afaffc7083">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkSidebarLicense" >
+      <bal:WixStandardBootstrapperApplication
+             LicenseUrl="https://www.atonline.com/page/tos"
+             LogoFile="..\Drive\Resource\icon.png" LogoSideFile="..\Drive\Resource\icon.png"
+            />
+    </BootstrapperApplicationRef>
 
 		<Chain>
       <PackageGroupRef Id="NetFx452Redist" />
-			<MsiPackage SourceFile="../Drive/Resource./Dokan_x64.msi" /> 
+			<MsiPackage SourceFile="../Drive/Resource/Dokan_x64.msi" /> 
 			<MsiPackage SourceFile="$(var.Installer.TargetPath)" /> 
 		</Chain>
 	</Bundle>

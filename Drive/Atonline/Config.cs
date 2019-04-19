@@ -76,7 +76,9 @@ namespace Drive.Atonline
                     "?embed=1&response_type=" + System.Web.HttpUtility.UrlEncode(LOGIN_RESPONSE_TYPE) +
                     "&scope=" + System.Web.HttpUtility.UrlEncode(LOGIN_SCOPE) +
                     "&client_id=" + System.Web.HttpUtility.UrlEncode(CLIENT_ID) +
-                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(REDIRECT_URI);
+                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(REDIRECT_URI)+
+                    "&_ctx[l]="+ Resource.Culture.Name;
+                ;
             }
         }
 

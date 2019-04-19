@@ -6,9 +6,16 @@
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate />
 
+    <Icon Id="Icon.exe" SourceFile="$(sys.CURRENTDIR)..\Drive\Resource\icon.ico"/>
+
     <Feature Id="ProductFeature" Title="Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="ResourceComponents" />
+      <ComponentGroupRef Id="JPComponents" />
+      <ComponentGroupRef Id="USComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+
     </Feature>
   </Product>
 
@@ -18,19 +25,67 @@
         <Directory Id="AtOnlineFolder" Name="AtOnline" >
           <Directory Id="INSTALLFOLDER" Name="Drive">
             <Directory Id="RESOURCEFOLDER" Name="Resource"></Directory>
+            <Directory Id="RESOURCEJP" Name="ja-JP"></Directory>
+            <Directory Id="RESOURCEUS" Name="en-US"></Directory>
           </Directory>
         </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="AtOnline - Drive"/>
+      </Directory>
+      
+      
+
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="15260702-3C15-488A-AE69-776C986C427E">
+          <Shortcut Id="ApplicationDesktopShortcut"
+              Name="AtOnline Drive"
+              Description="AtOnline - Drive"
+              Target="[#drive.exe]"
+              WorkingDirectory="INSTALLFOLDER"
+              Icon= "Icon.exe"/>
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue
+              Root="HKCU"
+              Key="Software\TristanTechnologies\AtOnlineDrive"
+              Name="installed"
+              Type="integer"
+              Value="1"
+              KeyPath="yes"/>
+        </Component>
       </Directory>
     </Directory>
   </Fragment>
 
   <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="82DE4924-5181-4BBD-8E23-8114C1632502">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="AtOnline - Drive"
+                  Description="AtOnline - Drive"
+                  Target="[#drive.exe]"
+                  Icon="Icon.exe"
+                  WorkingDirectory="INSTALLFOLDER"/>
+        
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\TristanTechnologies\AtOnlineDrive" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  
+
+  <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Win64="yes" Id="drive.exe" Guid="AFE48F41-2F70-49D5-8B68-1DC9E04D2135">
-        <File Source="$(var.Drive.TargetPath)" />
+        <File Id="drive.exe" Source="$(var.Drive.TargetPath)" />
       </Component>
       <Component  Win64="yes" Id="dokan1.dll" Guid="0B115BAE-33C6-4CA6-B668-9BF352EA3377">
         <File Source="..\Drive\Libs\dokan1.dll" />
+      </Component>
+      <Component  Win64="yes" Id="Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll" Guid="EFDC06B2-9018-4953-82F5-643F002B796D">
+        <File Source="..\Drive\Libs\Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll" />
       </Component>
       <Component  Win64="yes" Id="DokanNet.dll" Guid="4C768D04-8E28-4EC4-85CA-85981EBA852D">
         <File Source="..\Drive\Libs\DokanNet.dll" />
@@ -48,6 +103,16 @@
       </Component>
       <Component  Win64="yes" Id="logo.png" Guid="2C1AC6FF-1E83-426E-B37D-277553F77E22">
         <File Source="..\Drive\Resource\logo.png" />
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="JPComponents" Directory="RESOURCEJP">
+      <Component  Win64="yes" Id="jaJPDriveresources.dll" Guid="FD066917-BC2C-4B3C-92FF-D944C4766FA8">
+        <File Source="$(var.Drive.TargetDir)ja-JP\Drive.resources.dll" />
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="USComponents" Directory="RESOURCEUS">
+      <Component  Win64="yes" Id="enUSDriveresources.dll" Guid="DC9B20D6-08B1-4834-9182-04E30DEE612F">
+        <File Id="file.enUSDriveresources.dll" Source="$(var.Drive.TargetDir)en-US\Drive.resources.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

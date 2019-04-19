@@ -17,8 +17,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Image Source="Resource/logo.png" Stretch="None" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Welcome to AtOnline Drive" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"/>
-        <Button Style="{StaticResource MyButton}" Content="Connect to AtOnline Drive Service"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"  FontSize="18" Padding="30,10" Click="Button_Click" >
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{x:Static local:Resource.welcome_title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"/>
+        <Button Style="{StaticResource MyButton}" Content="{x:Static local:Resource.connect_btn}"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"  FontSize="18" Padding="30,10" Click="Button_Click" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                     <GradientStop Color="#FFD65DB1"/>

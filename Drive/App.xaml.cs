@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -129,6 +130,8 @@ namespace Drive
         {
             base.OnStartup(e);
 
+            Resource.Culture = CultureInfo.CurrentCulture;
+
             if (!checkProcess())
             {
                 Shutdown();
@@ -197,9 +200,9 @@ namespace Drive
         private void CreateContextMenu()
         {
             _notifyIcon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
-            _notifyIcon.ContextMenuStrip.Items.Add("Drives").Click += (s, e) => ShowDrives();
-            _notifyIcon.ContextMenuStrip.Items.Add("Logout").Click += (s, e) => Logout();
-            _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
+            _notifyIcon.ContextMenuStrip.Items.Add(Resource.tray_drives).Click += (s, e) => ShowDrives();
+            _notifyIcon.ContextMenuStrip.Items.Add(Resource.tray_logout).Click += (s, e) => Logout();
+            _notifyIcon.ContextMenuStrip.Items.Add(Resource.tray_exit).Click += (s, e) => ExitApplication();
 
             SetContextMenuStripStatus(ContextMenuStrip.Drive, false);
             SetContextMenuStripStatus(ContextMenuStrip.Logout, false);
@@ -216,7 +219,14 @@ namespace Drive
 
         private void ShowDrives()
         {
+            if (!IsLogged)
+            {
+                DisplayWindow(WindowType.Welcome);
+                return;
+            }
+
             if (MainWindow != null) MainWindow.Close();
+
             MainWindow = new MainWindow(new Mounter());
             MainWindow.Show();
         }

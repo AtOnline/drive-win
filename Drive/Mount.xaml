@@ -29,7 +29,7 @@
 
             </Grid.RowDefinitions>
             <Image Source="Resource/logo.png" Stretch="None" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Welcome to AtOnline Drive" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"/>
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{x:Static local:Resource.mount_explanations}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="/Drive;component/Resource/Fonts/#Source Han Sans Light"/>
 
             <ListView d:DataContext="{StaticResource d}"  x:Name="DriveList" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False" ItemsSource="{Binding AvailableDrives}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Margin="20,20,20,0" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Drive"
         xmlns:Controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView" x:Class="Drive.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="500" ResizeMode="NoResize" Icon="Resource/icon.ico">
+        Title="AtOnline - Drive" Height="700" Width="500" ResizeMode="NoResize" Icon="Resource/icon.ico">
     <Grid x:Name="LoginGrid">
         <DockPanel>
             <Frame x:Name="_mainFrame"  Background="#FFF9F9F9" NavigationUIVisibility="Hidden"/>
